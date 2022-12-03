@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/viewMi"
+        android:icon="@drawable/ic_ordenar"
+        android:title="Ordenar"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/ordenarNotaMi"
+                android:title="Ordenar por Nota " />
+
+            <item
+                android:id="@+id/ordenarNomeMi"
+                android:title="Ordenar por Nome" />
+        </menu>
+    </item>
+</menu>
