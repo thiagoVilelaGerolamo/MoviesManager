@@ -53,25 +53,80 @@ class FilmeSqlite(context: Context) : FilmeDao {
         }
     }
 
-    override fun create(filme: Filme): Int {
-        TODO("Not yet implemented")
+    private fun Filme.toContentValues() = with(ContentValues()) {
+        put(NOME_COLUMN, nome)
+        put(ANO_LANCAMENTO_COLUMN, ano_lancamento)
+        put(ESTUDIO_COLUMN, estudio)
+        put(TEMPO_DURACAO_COLUMN, tempo_duracao)
+        put(ASSISTIDO_COLUMN, assistido)
+        put(NOTA_COLUMN, nota)
+        put(GENERO_COLUMN, genero)
+        this
     }
 
+    private fun filmeToContentValues(filme: Filme) = with(ContentValues()) {
+        put(NOME_COLUMN, filme.nome)
+        put(ANO_LANCAMENTO_COLUMN, filme.ano_lancamento)
+        put(ESTUDIO_COLUMN, filme.estudio)
+        put(TEMPO_DURACAO_COLUMN, filme.tempo_duracao)
+        put(ASSISTIDO_COLUMN, filme.assistido)
+        put(NOTA_COLUMN, filme.nota)
+        put(GENERO_COLUMN, filme.genero)
+        this
+    }
+
+    private fun Cursor.rowToFilme() = Filme(
+        getInt(getColumnIndexOrThrow(ID_COLUMN)),
+        getString(getColumnIndexOrThrow(NOME_COLUMN)),
+        getString(getColumnIndexOrThrow(ANO_LANCAMENTO_COLUMN)),
+        getString(getColumnIndexOrThrow(ESTUDIO_COLUMN)),
+        getString(getColumnIndexOrThrow(TEMPO_DURACAO_COLUMN)),
+        getString(getColumnIndexOrThrow(ASSISTIDO_COLUMN)),
+        getString(getColumnIndexOrThrow(NOTA_COLUMN)),
+        getString(getColumnIndexOrThrow(GENERO_COLUMN))
+    )
+
+    override fun create(filme: Filme) = filmeSqliteDatabase.insert(
+        FILME_TABLE,
+        null,
+        filmeToContentValues(filme)
+    ).toInt()
+
     override fun getOne(id: Int): Filme? {
-        TODO("Not yet implemented")
+        val cursor = filmeSqliteDatabase.rawQuery(
+            "SELECT * FROM $FILME_TABLE WHERE $ID_COLUMN = ?",
+            arrayOf(id.toString())
+        )
+        val filme = if (cursor.moveToFirst()) cursor.rowToFilme() else null
+
+        cursor.close()
+        return filme
     }
 
     override fun getAll(): MutableList<Filme> {
-        TODO("Not yet implemented")
+        val filmeList = mutableListOf<Filme>()
+        val cursor = filmeSqliteDatabase.rawQuery(
+            "SELECT * FROM $FILME_TABLE",
+            null
+        )
+        while (cursor.moveToNext()) {
+            filmeList.add(cursor.rowToFilme())
+        }
+        cursor.close()
+        return filmeList
     }
 
-    override fun update(filme: Filme): Int {
-        TODO("Not yet implemented")
-    }
+    override fun update(filme: Filme) = filmeSqliteDatabase.update(
+        FILME_TABLE,
+        filme.toContentValues(),
+        "$ID_COLUMN = ?",
+        arrayOf(filme.nome)
+    )
 
-    override fun delete(id: Int): Int {
-        TODO("Not yet implemented")
-    }
-
-
+    override fun delete(id: Int) =
+        filmeSqliteDatabase.delete(
+            FILME_TABLE,
+            "$ID_COLUMN = ?",
+            arrayOf(id.toString())
+        )
 }

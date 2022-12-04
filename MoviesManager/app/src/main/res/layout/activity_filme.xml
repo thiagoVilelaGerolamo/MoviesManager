@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".view.FilmeActivity">
+
+    <EditText
+        android:id="@+id/nomeEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:inputType="textPersonName"
+        android:hint="Nome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ano_lancamentoEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:inputType="date"
+        android:hint="Ano Lancamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomeEt" />
+
+    <EditText
+        android:id="@+id/estudioEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:inputType="text"
+        android:hint="Estudio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ano_lancamentoEt" />
+
+    <EditText
+        android:id="@+id/tempo_duracaoEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:inputType="number"
+        android:hint="Duracao em min"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estudioEt" />
+
+    <EditText
+        android:id="@+id/notaEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:inputType="number"
+        android:hint="Nota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tempo_duracaoEt" />
+
+    <Spinner
+        android:id="@+id/generoSp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:hint="Genero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notaEt" />
+
+    <CheckBox
+        android:id="@+id/assistidoCb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Assistido"
+        app:layout_constraintTop_toBottomOf="@+id/generoSp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/saveBt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assistidoCb" />
+</androidx.constraintlayout.widget.ConstraintLayout>
